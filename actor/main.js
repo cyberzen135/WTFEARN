@@ -31,7 +31,7 @@ if (datasetId) {
 }
 
 work = work.filter(w => w.name && (w.address || w.zip));
-Actor.log.info(`Verifying ${work.length} businesses`);
+console.log(`Verifying ${work.length} businesses`);
 if (work.length === 0) {
   await Actor.pushData({ status: 'NO_INPUT', reason: 'Provide `records` or a `datasetId` with a matching fieldMap.' });
   await Actor.exit();
@@ -55,7 +55,7 @@ for (let i = 0; i < work.length; i += BATCH) {
       if (!res.ok) throw new Error(`upstream ${res.status}`);
       payload = await res.json();
     } catch (e) {
-      Actor.log.warning(`batch ${i / BATCH} attempt ${attempt}: ${e.message}`);
+      console.warn(`batch ${i / BATCH} attempt ${attempt}: ${e.message}`);
       if (attempt === 4) break;
       await new Promise(r => setTimeout(r, 1000 * 2 ** attempt));
     }
@@ -78,8 +78,8 @@ for (let i = 0; i < work.length; i += BATCH) {
     billed  += payload.billable_count;
   }
   matched += payload.results.filter(r => r.billable).length;
-  Actor.log.info(`batch ${i / BATCH + 1}: ${payload.results.length} rows, ${payload.billable_count} billable`);
+  console.log(`batch ${i / BATCH + 1}: ${payload.results.length} rows, ${payload.billable_count} billable`);
 }
 
-Actor.log.info(`Done. ${work.length} submitted, ${matched} matched to an official licence, ${billed} charged.`);
+console.log(`Done. ${work.length} submitted, ${matched} matched to an official licence, ${billed} charged.`);
 await Actor.exit();
