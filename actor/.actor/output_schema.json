@@ -1,0 +1,11 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Business Licence Verifier output",
+  "properties": {
+    "results": {
+      "type": "string",
+      "title": "Verification results",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    }
+  }
+}
