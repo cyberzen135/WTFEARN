@@ -1,0 +1,46 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "id": { "type": "string", "title": "Record ID" },
+      "input": { "type": "object", "title": "Input business record" },
+      "status": {
+        "type": "string",
+        "title": "Licence status",
+        "enum": ["ACTIVE", "LAPSED", "REVOKED", "CLOSED", "NOT_IN_LICENSED_CATEGORY", "NO_COVERAGE", "AMBIGUOUS", "TEMPORARILY_UNAVAILABLE"]
+      },
+      "billable": { "type": "boolean", "title": "Whether this record was charged" },
+      "confidence": { "type": "number", "title": "Match confidence score" },
+      "match_method": { "type": ["string", "null"], "title": "How the match was made" },
+      "licence": { "type": ["object", "null"], "title": "Matched licence record" },
+      "history": { "type": "array", "title": "Status change history" },
+      "coverage": { "type": "object", "title": "Jurisdiction coverage info" },
+      "reason": { "type": ["string", "null"], "title": "Explanation when unmatched" }
+    },
+    "required": ["id", "status", "billable"]
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "description": "Licence verification results",
+      "transformation": {
+        "fields": ["id", "status", "billable", "confidence", "match_method", "reason", "licence", "input"]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": { "label": "ID", "format": "text" },
+          "status": { "label": "Status", "format": "text" },
+          "billable": { "label": "Billed", "format": "boolean" },
+          "confidence": { "label": "Confidence", "format": "number" },
+          "match_method": { "label": "Match method", "format": "text" },
+          "reason": { "label": "Reason", "format": "text" },
+          "licence": { "label": "Licence", "format": "object" },
+          "input": { "label": "Input", "format": "object" }
+        }
+      }
+    }
+  }
+}
