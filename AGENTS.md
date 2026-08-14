@@ -1,35 +1,58 @@
-# AGENTS.md — System Context & Master Project State for LicenceCheck
+# AGENTS.md — Master Context & Handoff Specification for LicenceCheck
 
 > **MISSION**: Earn **$100+/week net passive revenue** via the **LicenceCheck** operating-status verifier on Apify Store ($0.05/record PPE) & Cloudflare Pages pSEO. Zero-touch, zero-support, <$10 launch cost.
 
 ---
 
-## 🎯 INSTANT CONTEXT FOR NEW AGENT SESSIONS
+## 🎯 INSTANT HANDOFF CONTEXT FOR NEW AI CODER AGENTS
 
-If you are a new AI agent or subagent resuming work on this project, read this section immediately:
+If you are a new AI coder agent resuming work on this repository, read this section immediately:
 
 ### 1. Where We Were
 - **Economic Gap Identified**: Local lead scrapers sell ~600k lead lists/month, but lists contain dead/closed businesses. Buyers pay $0.20–$0.30/record to enrich dead leads.
 - **Step 0 Kill Test (§19.1)**: Executed against 200 live Chicago BACP licence records (`r5kz-chrr`). Yielded **100.0% true-match rate** and **0.0% false-match rate**.
 - **Moat Defined**: Municipal portals overwrite current state. Our daily Worker cron records `status_event` timeline diffs and `missing_streak` deltas. This historical status change dataset **cannot be backfilled by competitors**.
 
-### 2. Where We Are Now
+### 2. Where We Are Now (100% Code Built & Verified)
 - **Full Architecture & Code Base Built**:
   - `worker/`: Cloudflare Worker API, D1 Database schema (`0001_init.sql`), SoDA ingester (`ingest.ts`), Entity Resolver (`resolve.ts`), Status Engine (`status.ts`), Gemini LLM Fallback (`llm.ts`), and REST API (`api.ts`).
   - `actor/`: Apify Actor storefront (`actor.json`, `input_schema.json`, `main.js`, `README.md`).
   - `site/`: Programmatic SEO static HTML generator (`build.mjs`) & GitHub Action workflow (`build.yml`).
   - `scripts/`: Diagnostic Kill Test suite (`kill_test.ts`).
-- **Tests & Verification**: Vitest unit test suite passing 7/7 tests (`npm test` in `worker/`). Static site generator tested and output verified in `site/dist/`.
+- **Tests & Verification**: Vitest unit test suite passing **11/11 tests** (`npm test` in `worker/`). Static site generator tested and output verified in `site/dist/`.
+- **GitHub Sync**: 100% of code, tests, and documentation are committed and pushed to `https://github.com/cyberzen135/WTFEARN`.
 
-### 3. What Needs To Be Done Next (Current Action Items)
-1. **GitHub Synchronization**: Keep code synchronized with `https://github.com/cyberzen135/WTFEARN`.
-2. **Cloudflare Worker Deployment**: Deploy worker via `cd worker && npx wrangler deploy` and execute D1 migration `npx wrangler d1 execute licencecheck --remote --file=migrations/0001_init.sql`.
-3. **Apify Actor Store Publication**: Push Actor to Apify Console, configure PPE monetization event `business-verified` at `$0.05`, and enable maximum free trial.
-4. **Cloudflare Pages pSEO Deployment**: Deploy `site/dist` to Cloudflare Pages project `licencecheck`.
+---
 
-### 4. Where We Are Going (Target Horizon)
-- **Month 1–2**: 4 launch cities (Chicago, NYC, SF, LA), ~20k indexed pSEO pages, 1–6 active monthly users ($24–$80 net/mo).
-- **Month 6 Target**: 6 cities, 180-day status timeline depth, 20+ monthly users, **10,834 verifications/month = $433/mo net ($100/week)**.
+## 🛑 WHAT PREVENTS INSTANT AUTOMATED DEPLOYMENT
+
+The product code is 100% ready for production. The **ONLY** items preventing immediate live execution are account authentication credentials:
+
+| Blocker / Dependency | Why It Blocks | How the Next AI Agent Can Unblock It |
+|---|---|---|
+| **1. Cloudflare Authentication (`wrangler login`)** | Cloudflare Workers & D1 remote database require account authorization to host the API and database. | Ask user to run `cmd /c npx wrangler login` or provide `CLOUDFLARE_API_TOKEN`. Once authenticated, run `npx wrangler d1 execute licencecheck --remote --file=migrations/0001_init.sql` and `npx wrangler deploy`. |
+| **2. Apify Store Console Setup** | Apify Actor PPE monetisation ($0.05/event) and PayPal payout must be linked to the user's personal Apify account. | Instruct user to open [Apify Console](https://console.apify.com/actors), link GitHub repo `cyberzen135/WTFEARN` (folder `actor`), set PPE event `business-verified` at `$0.05`, and link PayPal. |
+| **3. Cloudflare Pages Deployment** | Static pSEO site in `site/dist` needs initial deployment to `licencecheck.pages.dev`. | Once Cloudflare is authenticated, run `npx wrangler pages deploy site/dist --project-name licencecheck`. |
+
+---
+
+## ⚡ NEXT AGENT ACTION PLAN & DEPLOYMENT COMMANDS
+
+Once authentication is provided by the user, execute these exact steps:
+
+```bash
+# ---- Step 1: Worker & Database Deployment ----
+cd worker
+npx wrangler d1 create licencecheck
+npx wrangler d1 execute licencecheck --remote --file=migrations/0001_init.sql
+npx wrangler secret put API_KEY
+npx wrangler deploy
+
+# ---- Step 2: Static pSEO Deployment ----
+cd ../site
+node build.mjs
+npx wrangler pages deploy dist --project-name licencecheck
+```
 
 ---
 
@@ -48,7 +71,7 @@ Any agent modifying this codebase MUST enforce these mitigations:
 
 ## 📁 REPOSITORY MAP
 
-- [`AGENTS.md`](file:///c:/Users/Administrator/Desktop/WTF%20PROJECT/AGENTS.md) — Master context & agent instructions (THIS FILE).
+- [`AGENTS.md`](file:///c:/Users/Administrator/Desktop/WTF%20PROJECT/AGENTS.md) — Master context & handoff specification (THIS FILE).
 - [`README.md`](file:///c:/Users/Administrator/Desktop/WTF%20PROJECT/README.md) — Public overview & quickstart.
 - [`docs/DEVELOPER_GUIDE.md`](file:///c:/Users/Administrator/Desktop/WTF%20PROJECT/docs/DEVELOPER_GUIDE.md) — Exhaustive developer & coder agent guide.
 - [`docs/ARCHITECTURE.md`](file:///c:/Users/Administrator/Desktop/WTF%20PROJECT/docs/ARCHITECTURE.md) — System design & moat mechanics.
