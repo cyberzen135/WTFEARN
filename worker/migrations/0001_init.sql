@@ -87,6 +87,13 @@ CREATE TABLE IF NOT EXISTS city_month_rollup (
   PRIMARY KEY (portal_id, month, category_norm)
 );
 
+-- ============ DEMAND TELEMETRY ============
+CREATE TABLE IF NOT EXISTS unhandled_city_demand (
+  city             TEXT PRIMARY KEY,
+  request_count    INTEGER NOT NULL DEFAULT 1,
+  last_requested_at TEXT NOT NULL
+);
+
 -- ============ OPS ============
 CREATE TABLE IF NOT EXISTS snapshot_run (
   run_id       INTEGER PRIMARY KEY AUTOINCREMENT,

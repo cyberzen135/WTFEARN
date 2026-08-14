@@ -179,6 +179,19 @@ export async function resolveRecords(
         reason: `Jurisdiction '${city}' is not currently ingested in official registries.`
       });
 
+      // Record telemetry for demand-driven city expansion
+      try {
+        await env.DB.prepare(`
+          INSERT INTO unhandled_city_demand (city, request_count, last_requested_at)
+          VALUES (?, 1, ?)
+          ON CONFLICT(city) DO UPDATE SET
+            request_count = request_count + 1,
+            last_requested_at = excluded.last_requested_at
+        `).bind(city.toLowerCase(), todayStr).run();
+      } catch (err) {
+        console.error('Failed to log unhandled city demand:', err);
+      }
+
       await env.DB.prepare(
         `INSERT OR REPLACE INTO match_cache (query_hash, licence_uid, score, method, decided_at) VALUES (?, NULL, 0, 'confirmed_none', ?)`
       ).bind(queryHash, todayStr).run();
