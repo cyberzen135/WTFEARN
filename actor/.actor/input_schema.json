@@ -1,0 +1,40 @@
+{
+  "title": "Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "records": {
+      "title": "Businesses to verify",
+      "type": "array",
+      "description": "Each item: {name, address, city, state, zip}. Leave empty if you use a source dataset.",
+      "editor": "json",
+      "prefill": [{ "name": "Joe's Pizza", "address": "123 N Main St", "city": "Chicago", "state": "IL", "zip": "60601" }]
+    },
+    "datasetId": {
+      "title": "Source dataset ID (chain from any Google Maps scraper)",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Paste the dataset ID of a previous run. The Actor reads it directly — no CSV export needed."
+    },
+    "fieldMap": {
+      "title": "Field mapping for the source dataset",
+      "type": "object",
+      "editor": "json",
+      "default": { "name": "title", "address": "street", "city": "city", "state": "state", "zip": "postalCode" }
+    },
+    "includeHistory": {
+      "title": "Include licence status history",
+      "type": "boolean",
+      "default": true,
+      "description": "Adds every observed status change with the date it was observed."
+    },
+    "minScore": {
+      "title": "Minimum match confidence",
+      "type": "number",
+      "default": 0.88,
+      "minimum": 0.7,
+      "maximum": 0.99
+    }
+  },
+  "required": []
+}

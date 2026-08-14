@@ -1,0 +1,19 @@
+name: build-site
+on:
+  schedule: [{ cron: "30 8 * * *" }]     # Daily after Worker ingest at 07:00 UTC
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: node site/build.mjs
+        env:
+          LICENCECHECK_API: ${{ secrets.LICENCECHECK_API }}
+          LICENCECHECK_KEY: ${{ secrets.LICENCECHECK_KEY }}
+      - run: npx wrangler pages deploy site/dist --project-name licencecheck
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_TOKEN }}

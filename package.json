@@ -1,0 +1,14 @@
+{
+  "name": "licencecheck-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LicenceCheck — Official Operating-Status Verifier for Local Business Lists",
+  "type": "module",
+  "scripts": {
+    "kill-test": "npx tsx scripts/kill_test.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,20 @@
+name = "licencecheck"
+main = "src/index.ts"
+compatibility_date = "2026-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "licencecheck"
+database_id = "licencecheck-d1-id"
+
+[[r2_buckets]]
+binding = "SNAPSHOTS"
+bucket_name = "licencecheck-snapshots"
+
+[triggers]
+crons = ["0 7 * * *"]
+
+[vars]
+MIN_SCORE_AUTO = "0.88"
+MIN_SCORE_LLM = "0.72"
+MISSING_STREAK_CLOSED = "3"
