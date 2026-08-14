@@ -20,6 +20,7 @@
       "title": "Field mapping for the source dataset",
       "type": "object",
       "editor": "json",
+      "description": "Maps your source dataset's column names to name/address/city/state/zip. Only needed if your scraper uses different field names than the default.",
       "default": { "name": "title", "address": "street", "city": "city", "state": "state", "zip": "postalCode" }
     },
     "includeHistory": {
@@ -33,7 +34,8 @@
       "type": "number",
       "default": 0.88,
       "minimum": 0.7,
-      "maximum": 0.99
+      "maximum": 0.99,
+      "description": "Minimum similarity score required for an automatic match, before falling back to LLM adjudication or returning no match."
     }
   },
   "required": []

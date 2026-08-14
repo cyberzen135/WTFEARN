@@ -5,7 +5,7 @@ compatibility_date = "2026-01-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "licencecheck"
-database_id = "licencecheck-d1-id"
+database_id = "85465a5e-e44d-4d46-b89a-4f4a84b06403"
 
 [[r2_buckets]]
 binding = "SNAPSHOTS"

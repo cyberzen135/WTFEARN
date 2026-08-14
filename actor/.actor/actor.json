@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "business-licence-verifier",
-  "title": "Business Licence Verifier — Active, Lapsed or Closed",
-  "description": "Check any local business list against official city licence registries. Returns active/lapsed/revoked/closed with dates, licence type and a link to the government record. You are charged only for records matched to an official licence.",
+  "title": "NYC, Chicago, LA & SF Business Licence Verifier",
+  "description": "Check business lists from New York City, Chicago, Los Angeles or San Francisco against official city licence registries. Returns active/lapsed/revoked/closed with dates, licence type and a link to the government record. You are charged only for records matched to an official licence.",
   "version": "0.1",
   "buildTag": "latest",
   "dockerfile": "../Dockerfile",
