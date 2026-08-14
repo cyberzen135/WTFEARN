@@ -50,6 +50,7 @@ Any agent modifying this codebase MUST enforce these mitigations:
 
 - [`AGENTS.md`](file:///c:/Users/Administrator/Desktop/WTF%20PROJECT/AGENTS.md) — Master context & agent instructions (THIS FILE).
 - [`README.md`](file:///c:/Users/Administrator/Desktop/WTF%20PROJECT/README.md) — Public overview & quickstart.
+- [`docs/DEVELOPER_GUIDE.md`](file:///c:/Users/Administrator/Desktop/WTF%20PROJECT/docs/DEVELOPER_GUIDE.md) — Exhaustive developer & coder agent guide.
 - [`docs/ARCHITECTURE.md`](file:///c:/Users/Administrator/Desktop/WTF%20PROJECT/docs/ARCHITECTURE.md) — System design & moat mechanics.
 - [`docs/OPERATIONAL_GUIDE.md`](file:///c:/Users/Administrator/Desktop/WTF%20PROJECT/docs/OPERATIONAL_GUIDE.md) — Zero-support operational guidelines.
 - [`docs/subagent-instructions.md`](file:///c:/Users/Administrator/Desktop/WTF%20PROJECT/docs/subagent-instructions.md) — Subagent guidelines.
